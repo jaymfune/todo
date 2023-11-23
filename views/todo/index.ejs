@@ -1,30 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layouts/boilerplate')%>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="mb-4">
+      <form action="todos" method="POST">
+        <label class="form-label" for="name">Create a new task</label>
+        <input class="form-control mb-3" type="text" id="name" name="todo[name]">
+        <button class="btn btn-secondary">Add Todo</button>
+      </form>
+    </div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo</title>
-</head>
+    <ul class="list-group mb-5">
+      <% for (let todo of todos) { %>
+      <li class="list-group-item py-3">
+        <span <% if(todo.category == "completed"){%> class="text-decoration-line-through" <% } %>><%= todo.name %> - <%= todo.category %></span>
+        <div class="mt-2 d-flex">
+          <form action="/todos/<%= todo._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+          <div class="mx-2"></div>
+          <form action="/todos/<%= todo._id %>?_method=PUT" method="POST">
 
-<body>
-  <form action="todos" method="POST">
-    <label for="name">Create a new task</label>
-    <input type="text" id="name" name="todo[name]">
-    <button>Add Todo</button>
-  </form>
-
-  <ul>
-    <% for (let todo of todos) { %>
-    <li><%= todo.name %> - <%= todo.category %></li>
-    <form action="/todos/<%= todo._id %>?_method=DELETE" method="POST">
-      <button>Delete</button>
-    </form>
-    <form action="/todos/<%= todo._id %>?_method=PUT" method="POST">
-      <button>Complete</button>
-    </form>
-    <% } %>
-  </ul>
-</body>
-
-</html>
+            <button class="btn btn-success" <% if(todo.category == "completed"){%> disabled <% } %>>Complete</button>
+          </form>
+        </div>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+</div>
