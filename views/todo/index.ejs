@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo</title>
+</head>
+
+<body>
+  <form action="todos" method="POST">
+    <label for="name">Create a new task</label>
+    <input type="text" id="name" name="todo[name]">
+    <button>Add Todo</button>
+  </form>
+
+  <ul>
+    <% for (let todo of todos) { %>
+    <li><%= todo.name %> - <%= todo.category %></li>
+    <form action="/todos/<%= todo._id %>?_method=DELETE" method="POST">
+      <button>Delete</button>
+    </form>
+    <form action="/todos/<%= todo._id %>?_method=PUT" method="POST">
+      <button>Complete</button>
+    </form>
+    <% } %>
+  </ul>
+</body>
+
+</html>
