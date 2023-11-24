@@ -2,9 +2,9 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <div class="mb-4">
-      <form action="todos" method="POST">
+      <form action="todos" method="POST" novalidate class="validated-form">
         <label class="form-label" for="name">Create a new task</label>
-        <input class="form-control mb-3" type="text" id="name" name="todo[name]">
+        <input class="form-control mb-3" type="text" id="name" name="todo[name]" required>
         <button class="btn btn-secondary">Add Todo</button>
       </form>
     </div>
